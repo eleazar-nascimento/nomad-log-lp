@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>NomadLog — O Diário de Bordo e Gastos 100% Offline para Mochileiros e Nômades</title>
+    <meta name="title" content="NomadLog — O Diário de Bordo e Gastos 100% Offline para Mochileiros e Nômades" />
+    <meta name="description" content="Planeje roteiros, converta despesas em mais de 150 moedas sem sinal de celular e registre memórias de viagem com mapas vetoriais leves e cache offline seguro." />
+    <meta name="keywords" content="diário de viagem offline, app mochileiro, conversor de moedas offline, controle de gastos viagem, roteiro dia a dia offline, diário de bordo digital, turismo nômade digital, checklist bagagem viagem" />
+    <meta name="author" content="NomadLog" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nomadlog.app/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nomadlog.app/" />
+    <meta property="og:title" content="NomadLog — O Diário de Bordo e Gastos 100% Offline" />
+    <meta property="og:description" content="Planeje roteiros, converta despesas em 150+ moedas sem conexão e controle sua mochila em viagens remotas pelo mundo." />
+    <meta property="og:site_name" content="NomadLog" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="https://nomadlog.app/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://nomadlog.app/" />
+    <meta property="twitter:title" content="NomadLog — O Diário de Bordo e Gastos 100% Offline" />
+    <meta property="twitter:description" content="Planeje roteiros, converta despesas em 150+ moedas sem conexão e controle sua mochila em viagens remotas pelo mundo." />
+    <meta property="twitter:image" content="https://nomadlog.app/og-image.png" />
+
+    <!-- Theme & Icons -->
+    <meta name="theme-color" content="#0F121A" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data (JSON-LD) for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://nomadlog.app/#application",
+          "name": "NomadLog",
+          "operatingSystem": "iOS, Android, Web",
+          "applicationCategory": "TravelApplication",
+          "description": "Aplicativo de viagem 100% offline para planejamento de roteiro, controle financeiro multimoedas, pesagem de mochila e diário de memórias.",
+          "offers": [
+            {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "BRL",
+              "name": "O Mochileiro Base (Gratuito)"
+            },
+            {
+              "@type": "Offer",
+              "price": "59.90",
+              "priceCurrency": "BRL",
+              "name": "Mochileiro Pro (Vitalício)"
+            }
+          ],
+          "featureList": [
+            "Conversor multimoedas offline com taxa congelada",
+            "Mapas vetoriais leves sem consumo de dados de roaming",
+            "Checklist de bagagem com balança de pesagem em kg",
+            "Diário de bordo com fotos locais e memórias",
+            "Criptografia local AES-256"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://nomadlog.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "O app realmente não consome nada de internet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim! O banco de dados, o conversor de moedas, os mapas vetoriais e as fotos ficam armazenados localmente na memória do seu smartphone. Você pode colocar em modo avião ou desligar os dados móveis sem medo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como o câmbio se mantém atualizado se não há conexão?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sempre que você estiver conectado no Wi-Fi de um café ou hostel, o app busca as cotações oficiais e congela o snapshot no celular. Quando você vai para a rua ou para a trilha, ele usa essa taxa congelada."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "E se eu trocar de celular durante a viagem?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No plano Mochileiro Pro, todas as alterações pendentes entram em uma fila e são enviadas para um backup criptografado sempre que houver sinal de internet."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="min-h-screen bg-dark-800 text-slate-100 font-sans selection:bg-brand-orange selection:text-white antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
