@@ -1,4 +1,5 @@
 import React from 'react';
+import { LocaleProvider } from './context/LocaleContext';
 import { AnnouncementBanner } from './components/AnnouncementBanner';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -12,22 +13,23 @@ import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-dark-800 text-slate-100 flex flex-col">
-      <AnnouncementBanner />
-      <Navbar />
-      <main id="main-content" className="flex-1">
-        <Hero />
-        <ProductMockup />
-        <LiveConverter />
-        <Features />
-        <ComparisonTable />
-        <Pricing />
-        <Faq />
-      </main>
-      <Footer />
-    </div>
+    <LocaleProvider>
+      <div className="min-h-screen bg-dark-800 text-slate-100 flex flex-col">
+        <AnnouncementBanner />
+        <Navbar />
+        <main id="main-content" className="flex-1">
+          <Hero />
+          <ProductMockup />
+          <LiveConverter />
+          <Features />
+          <ComparisonTable />
+          <Pricing />
+          <Faq />
+        </main>
+        <Footer />
+      </div>
+    </LocaleProvider>
   );
 };
 
 export default App;
-

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Compass } from 'lucide-react';
+import { useLocale } from '../context/LocaleContext';
 
 export const Footer: React.FC = () => {
+  const { t } = useLocale();
+
   return (
     <footer
       aria-label="Rodapé do site"
@@ -14,26 +17,28 @@ export const Footer: React.FC = () => {
           </div>
           <span className="text-white font-bold text-sm">NomadLog</span>
           <span className="text-slate-500">•</span>
-          <span>Feito para viajantes do mundo</span>
+          <span>{t.footer.madeFor}</span>
         </div>
 
         <div>
-          <p>© {new Date().getFullYear()} NomadLog. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} NomadLog. {t.footer.rights}</p>
         </div>
 
         <nav aria-label="Links rápidos do rodapé" className="flex items-center gap-5">
           <a href="#como-funciona" className="hover:text-white transition-colors">
-            Recursos
+            {t.nav.howItWorks}
+          </a>
+          <a href="#comparativo" className="hover:text-white transition-colors">
+            {t.nav.comparison}
           </a>
           <a href="#precos" className="hover:text-white transition-colors">
-            Planos
+            {t.nav.pricing}
           </a>
           <a href="#faq" className="hover:text-white transition-colors">
-            Suporte
+            {t.nav.faq}
           </a>
         </nav>
       </div>
     </footer>
   );
 };
-

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { useLocale } from '../context/LocaleContext';
 
 export const AnnouncementBanner: React.FC = () => {
+  const { t } = useLocale();
+
   return (
     <aside
       aria-label="Aviso de Lançamento"
@@ -9,12 +12,9 @@ export const AnnouncementBanner: React.FC = () => {
     >
       <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-orange/30 text-brand-orange text-xs font-bold">
         <Sparkles className="w-3 h-3" aria-hidden="true" />
-        NOVO
+        {t.announcement.badge}
       </span>
-      <span>
-        Lançamento Oficial: Baixe agora e ganhe 1 viagem ativa com todos os recursos offline grátis!
-      </span>
+      <span>{t.announcement.text}</span>
     </aside>
   );
 };
-

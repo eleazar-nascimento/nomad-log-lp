@@ -1,3 +1,5 @@
+export type Locale = 'pt' | 'en';
+
 export interface CurrencyOption {
   code: string;
   name: string;
@@ -10,14 +12,16 @@ export interface FeatureItem {
   title: string;
   description: string;
   tag: string;
-  iconName: 'coins' | 'map' | 'book-open' | 'backpack';
+  iconName: 'coins' | 'map' | 'book-open' | 'backpack' | 'file-spreadsheet' | 'activity';
   colorClass: 'orange' | 'sky' | 'purple' | 'emerald';
 }
 
 export interface ComparisonRow {
-  scenario: string;
-  traditional: string;
+  feature: string;
   nomadLog: string;
+  wanderlog: string;
+  polarsteps: string;
+  isExclusive?: boolean;
 }
 
 export interface FaqItem {
@@ -37,4 +41,3 @@ export interface PricingPlan {
   ctaLabel: string;
   highlighted?: boolean;
 }
-

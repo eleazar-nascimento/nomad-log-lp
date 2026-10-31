@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ShieldCheck } from 'lucide-react';
+import { useLocale } from '../context/LocaleContext';
 import { CurrencyOption } from '../types';
 
 const CURRENCIES: CurrencyOption[] = [
@@ -15,6 +16,7 @@ const CURRENCIES: CurrencyOption[] = [
 const BRL_USD_RATE = 5.85;
 
 export const LiveConverter: React.FC = () => {
+  const { t, locale } = useLocale();
   const [selectedCurrencyCode, setSelectedCurrencyCode] = useState<string>('THB');
   const [amount, setAmount] = useState<string>('150');
 
@@ -29,24 +31,27 @@ export const LiveConverter: React.FC = () => {
     const valInUSD = numericAmount / rateToUSD;
     const valInBRL = valInUSD * BRL_USD_RATE;
 
-    return new Intl.NumberFormat('pt-BR', {
+    const currencyCode = locale === 'pt' ? 'BRL' : 'USD';
+    const targetVal = locale === 'pt' ? valInBRL : valInUSD;
+
+    return new Intl.NumberFormat(locale === 'pt' ? 'pt-BR' : 'en-US', {
       style: 'currency',
-      currency: 'BRL',
-    }).format(valInBRL);
-  }, [amount, selectedCurrency]);
+      currency: currencyCode,
+    }).format(targetVal);
+  }, [amount, selectedCurrency, locale]);
 
   return (
     <section id="conversor" aria-labelledby="conversor-heading" className="py-20 bg-dark-800">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-12">
           <span className="text-xs font-bold text-brand-amber uppercase tracking-widest px-3 py-1 rounded-full bg-brand-amber/10 border border-brand-amber/30">
-            EXPERIMENTE AO VIVO
+            {t.converter.tag}
           </span>
           <h2 id="conversor-heading" className="text-3xl sm:text-4xl font-bold text-white mt-4 mb-3">
-            Como você converte gastos na rua sem internet?
+            {t.converter.heading}
           </h2>
           <p className="text-slate-300 max-w-xl mx-auto text-sm sm:text-base">
-            O NomadLog armazena o último snapshot de câmbio no seu celular. Digite um valor abaixo para ver o cálculo instantâneo:
+            {t.converter.subheading}
           </p>
         </header>
 
@@ -62,7 +67,7 @@ export const LiveConverter: React.FC = () => {
                 htmlFor="currency-select"
                 className="block text-xs font-semibold text-slate-300 mb-2"
               >
-                Você paga na moeda local:
+                {t.converter.payInLabel}
               </label>
               <div className="flex items-center gap-2 mb-3">
                 <select
@@ -81,7 +86,7 @@ export const LiveConverter: React.FC = () => {
               </div>
 
               <label htmlFor="amount-input" className="sr-only">
-                Valor pago na moeda selecionada
+                {t.converter.placeholder}
               </label>
               <input
                 id="amount-input"
@@ -91,7 +96,7 @@ export const LiveConverter: React.FC = () => {
                 step="any"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                placeholder="Valor pago"
+                placeholder={t.converter.placeholder}
                 className="w-full bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 text-2xl font-bold text-white focus:outline-none focus:border-brand-orange"
               />
             </div>
@@ -99,7 +104,7 @@ export const LiveConverter: React.FC = () => {
             <div className="flex flex-col justify-between">
               <div>
                 <span className="block text-xs font-semibold text-slate-300 mb-2">
-                  Equivalente em Real Brasileiro (BRL):
+                  {t.converter.equivalentLabel}
                 </span>
                 <div
                   className="bg-dark-800 border border-dark-600 rounded-xl px-4 py-3 min-h-[58px] flex items-center"
@@ -111,10 +116,10 @@ export const LiveConverter: React.FC = () => {
               </div>
 
               <div className="mt-4 p-3 rounded-xl bg-dark-800/60 border border-dark-600 flex items-center justify-between text-xs">
-                <span className="text-slate-400">Status da Cotação:</span>
+                <span className="text-slate-400">{t.converter.statusLabel}</span>
                 <span className="text-brand-emerald font-semibold flex items-center gap-1">
                   <ShieldCheck className="w-4 h-4" aria-hidden="true" />
-                  <span>Congelada no Cache Offline</span>
+                  <span>{t.converter.statusValue}</span>
                 </span>
               </div>
             </div>
@@ -124,4 +129,3 @@ export const LiveConverter: React.FC = () => {
     </section>
   );
 };
-

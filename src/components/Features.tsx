@@ -1,47 +1,18 @@
 import React from 'react';
-import { Coins, Map, BookOpen, Backpack, ChevronRight } from 'lucide-react';
+import {
+  Coins,
+  Map,
+  BookOpen,
+  Backpack,
+  Activity,
+  FileSpreadsheet,
+} from 'lucide-react';
+import { useLocale } from '../context/LocaleContext';
 import { FeatureItem } from '../types';
 
-const FEATURES: FeatureItem[] = [
-  {
-    id: 'multimoedas',
-    title: 'Multimoedas com Câmbio Offline',
-    description:
-      'Pague em Dong, Baht, Ienes ou Pesos. O app sabe a taxa de conversão congelada e desconta da sua meta em Reais na hora.',
-    tag: 'Conversão em 0.01s',
-    iconName: 'coins',
-    colorClass: 'orange',
-  },
-  {
-    id: 'roteiro-mapas',
-    title: 'Roteiro & Mapas Vetoriais Leves',
-    description:
-      'Mapas em SVG leves que nunca falham por falta de internet. Nós de rota, altimetria da trilha e horários de transporte.',
-    tag: 'Altimetria e Paradas',
-    iconName: 'map',
-    colorClass: 'sky',
-  },
-  {
-    id: 'diario-memorias',
-    title: 'Diário de Bordo & Memórias',
-    description:
-      'Fotos guardadas no disco local, tags de clima, altitude do mirante e estado de espírito da aventura para nunca esquecer.',
-    tag: 'Fotos & Histórias',
-    iconName: 'book-open',
-    colorClass: 'purple',
-  },
-  {
-    id: 'checklist-mochila',
-    title: 'Checklist com Balança da Mochila',
-    description:
-      'Anel de progresso circular dos itens essenciais, documentos e remédios, com cálculo de peso em kg para não pagar excesso.',
-    tag: 'Peso e Documentos',
-    iconName: 'backpack',
-    colorClass: 'emerald',
-  },
-];
-
 export const Features: React.FC = () => {
+  const { t } = useLocale();
+
   const getIcon = (name: FeatureItem['iconName']) => {
     switch (name) {
       case 'coins':
@@ -52,6 +23,12 @@ export const Features: React.FC = () => {
         return <BookOpen className="w-6 h-6" aria-hidden="true" />;
       case 'backpack':
         return <Backpack className="w-6 h-6" aria-hidden="true" />;
+      case 'activity':
+        return <Activity className="w-6 h-6" aria-hidden="true" />;
+      case 'file-spreadsheet':
+        return <FileSpreadsheet className="w-6 h-6" aria-hidden="true" />;
+      default:
+        return <Map className="w-6 h-6" aria-hidden="true" />;
     }
   };
 
@@ -81,6 +58,12 @@ export const Features: React.FC = () => {
           hover: 'hover:border-brand-emerald/50',
           tagText: 'text-brand-emerald',
         };
+      default:
+        return {
+          bg: 'bg-brand-orange/15 border-brand-orange/30 text-brand-orange',
+          hover: 'hover:border-brand-orange/50',
+          tagText: 'text-brand-orange',
+        };
     }
   };
 
@@ -93,39 +76,47 @@ export const Features: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center max-w-3xl mx-auto mb-16">
           <h2 id="features-heading" className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Desenvolvido por quem viaja para quem viaja
+            {t.features.heading}
           </h2>
           <p className="text-slate-400 text-base">
-            Chega de perder tempo abrindo 4 aplicativos diferentes ou esquecendo quanto pagou num táxi
-            porque o roaming estava desligado.
+            {t.features.subheading}
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {FEATURES.map((item) => {
-            const styles = getColorClasses(item.colorClass);
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {t.features.items.map((feature) => {
+            const colors = getColorClasses(feature.colorClass);
+
             return (
               <article
-                key={item.id}
-                aria-labelledby={`feature-${item.id}`}
-                className={`p-6 rounded-2xl bg-dark-800 border border-dark-600 ${styles.hover} transition-all flex flex-col justify-between`}
+                key={feature.id}
+                aria-labelledby={`feature-title-${feature.id}`}
+                className={`p-6 rounded-3xl bg-dark-800 border border-dark-600 ${colors.hover} transition-all duration-200 flex flex-col justify-between group`}
               >
                 <div>
-                  <div
-                    className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 ${styles.bg}`}
-                  >
-                    {getIcon(item.iconName)}
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className={`w-12 h-12 rounded-2xl border flex items-center justify-center ${colors.bg}`}
+                    >
+                      {getIcon(feature.iconName)}
+                    </div>
+                    <span
+                      className={`text-[11px] font-bold uppercase tracking-wider ${colors.tagText}`}
+                    >
+                      {feature.tag}
+                    </span>
                   </div>
-                  <h3 id={`feature-${item.id}`} className="text-lg font-bold text-white mb-2">
-                    {item.title}
+
+                  <h3
+                    id={`feature-title-${feature.id}`}
+                    className="text-lg font-bold text-white mb-2 group-hover:text-brand-orange transition-colors"
+                  >
+                    {feature.title}
                   </h3>
-                  <p className="text-slate-300 text-sm leading-relaxed">{item.description}</p>
-                </div>
-                <div
-                  className={`mt-6 text-xs font-semibold flex items-center gap-1 ${styles.tagText}`}
-                >
-                  <span>{item.tag}</span>
-                  <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
+
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                    {feature.description}
+                  </p>
                 </div>
               </article>
             );
@@ -135,4 +126,3 @@ export const Features: React.FC = () => {
     </section>
   );
 };
-
